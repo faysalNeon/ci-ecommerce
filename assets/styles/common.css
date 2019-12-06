@@ -1,0 +1,186 @@
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-track { background: #343a40;}
+::-webkit-scrollbar-thumb { border-radius: 4px; background: #3199b3;}
+::-webkit-scrollbar:hover { border: none; background: black;}
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    /* -webkit-appearance:none; */
+    box-shadow: none !important;
+}
+.table td, .table th{
+    vertical-align: middle!important;
+}
+/* end common */
+.app-header{
+    background-color: white;
+}
+.app-header .dropdown-menu .card{
+    min-width: 280px;
+}
+.shortcut .cart-menu .cart-delete{
+    float: right;
+    color: #dc3545;
+    margin-top: -27px;
+}
+.shortcut .cart-menu .cart-delete .mdi{
+    font-size: 25px;
+}
+.shortcut .dropdown-menu{
+    right: 0;
+    left: auto;
+    border: none;
+    padding-top: 1.2rem;
+    background-color: transparent;
+}
+.shortcut .cart-menu .cart-delete:hover{
+    color:tomato;
+}
+/* end Header  */
+.app-body{
+    min-height: 60vh;
+}
+/* end Body */
+.area-home{
+    overflow:hidden;
+}
+.area-home .home-slider.slick-slider{
+    margin: 0;
+}
+.area-home .home-slider .item{
+    position:relative;
+}
+.area-home .home-slider .item .content{
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    width:100%;
+    height:100%;
+    position:absolute;
+    background-color: rgba(7, 43, 255, 0.3);
+}
+.area-home .home-slider .item .title{
+    margin:30px 0;
+    text-transform:uppercase;
+}
+.area-home .home-slider .item .subtitle{
+    text-transform:capitalize;
+}
+.area-home .home-slider .slick-dots{
+    bottom: 20px;
+}
+.area-home .home-slider .slick-dots li button:before{
+    font-size: 25px;
+}
+.area-home .home-slider .slick-dots li.slick-active button:before{
+    color:white;
+}
+.area-home .home-slider .slick-dots li button:before{
+    color:white;
+}
+.area-home .home-slider .slick-dots li.slick-active button:before{
+    color:white;
+}
+.area-auth{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+/* eid interface one  */
+.card-banner{
+    overflow:hidden;
+}
+.card-banner:before{
+    top: 5%;
+    left: 2.5%;
+    opacity: 1;
+    width: 95%;
+    height: 90%;
+    content: '';
+    z-index: 12;
+    border-radius: 4px;
+    position: absolute;
+    border: 5px solid #d39e00;
+    transition: all 0.3s ease-in-out;
+}
+.card-banner:hover::before{
+    top: 0;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+    z-index: -1;
+    height: 100%;
+}
+.card-banner .card-img-overlay{
+    background-color:rgba(7, 43, 255, 0.3);
+}
+.card-banner:hover .card-img-overlay{
+    background-color:rgba(7, 43, 255, 0.5);
+}
+.card-banner .card-title{
+    left: 5%;
+    top: -50%;
+    width: 90%;
+    color: #ffc107;
+    position: absolute;
+    text-transform: uppercase;
+    transition: all 0.5s ease-in-out;
+}
+.card-banner:hover .card-title{
+    top:10%;
+}
+.card-banner .btn-card{
+    left:5%;
+    width:90%;
+    bottom:-50%;
+    position:absolute;
+    transition: all 0.5s ease-in-out;
+}
+.card-banner:hover .btn-card{
+    bottom:10%;
+}
+/* end banner area  */
+section.area-feature {
+    background-color: #fdf4bd;
+}
+
+.card-product{
+    max-width: 300px;
+    overflow: hidden;
+    margin-right: 5px;
+    position: relative;
+    margin-bottom: 1rem;
+    display: inline-block;
+    border-color: #ffc107;
+    transition: all 0.5s ease-in-out;
+    box-shadow: 0 .125rem .25rem rgba(7, 43, 255, 0.5);
+} 
+.card-product:hover{
+    box-shadow: 0 .3rem .5rem rgba(7, 43, 255, 0.5);
+}
+.card-product .card-img-overlay{
+    top: 650px;
+    background: rgba(7, 43, 255, 0.5);
+    transition: all 0.8s ease-in-out;
+}
+.card-product:hover .card-img-overlay{
+    top: 0px;
+}
+.card-product .card-action{
+    margin-top:50%;
+}
+.card-product:hover .card-footer{
+    bottom: 0;
+}
