@@ -22,12 +22,7 @@
 						<tbody>
 							<?php if(count($this->cart->contents())<1):?>
 							<tr class="table-danger">
-								<td colspan="3"><b>Empty Cart</b></td>
-								<td colspan="3">
-									<a href="<?=base_url()?>" class="btn btn-block btn-sm btn-info">
-										<span>Continue</span>
-									</a>
-								</td>
+								<td colspan="6"><b>Empty Cart</b></td>
 							</tr>
 							<?php else:?>
 							<?php foreach ($this->cart->contents() as $key => $item):?>

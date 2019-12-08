@@ -11743,7 +11743,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sSearch": "Search:",
+			"sSearch": "",
 	
 	
 			/**
@@ -11754,7 +11754,7 @@
 			 *  @dtopt Language
 			 *  @name DataTable.defaults.language.searchPlaceholder
 			 */
-			"sSearchPlaceholder": "",
+			"sSearchPlaceholder": "Search Data",
 	
 	
 			/**
@@ -15394,8 +15394,8 @@ var DataTable = $.fn.dataTable;
 /* Set the defaults for DataTables initialisation */
 $.extend( true, DataTable.defaults, {
 	dom:
-		"<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
-		"<'row'<'col-sm-12'tr>>" +
+		"<'row text-center-md'<'col-sm-12 col-md-8'l><'col-sm-12 col-md-4'f>>" +
+		"<'row'<'col-sm-12'<'table-responsive-md'tr>>>" +
 		"<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
 	renderer: 'bootstrap'
 } );
@@ -15518,7 +15518,7 @@ DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, bu
 	catch (e) {}
 
 	attach(
-		$(host).empty().html('<ul class="pagination"/>').children('ul'),
+		$(host).empty().html('<ul class="pagination pagination-sm"/>').children('ul'),
 		buttons
 	);
 

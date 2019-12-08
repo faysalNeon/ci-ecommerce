@@ -7,4 +7,4 @@ $autoload['drivers'] = array();
 $autoload['helper'] = array('common','url','text','file','directory','inflector','form','script');
 $autoload['config'] = array();
 $autoload['language'] = array();
-$autoload['model'] = array();
+$autoload['model'] = array('HomeModel'=>'hm','ProductsModel'=>'pm');

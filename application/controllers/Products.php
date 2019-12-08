@@ -2,22 +2,22 @@
 class Products extends CI_Controller{
     public function __construct(){
         parent::__construct();
-        $this->load->model('ProductsModal','pm');
     }
     public function index(){
         $data['title']='all Products';
-        $data['productList']=$this->db->where('products.status',1)->get('products')->result();        
+        $data['productList']=$this->pm->by_id();        
         $this->load->store('products/category', $data);
     }
-    public function category($slug=null){
-        if($slug==null) return redirect('products');
-        $data['title']=$this->pm->category($slug)->name;
-        $data['productList']=$this->pm->by_category($slug);
+    public function category($id=null){
+        if($id==null) return redirect('products');
+        $data['title']=$this->pm->category($id)->name;
+        $data['productList']=$this->pm->product_by_category_id($id);
         $this->load->store('products/category',$data);
     }
-    public function single($params=null){
-        $data['title']=$this->pm->by_code($params)->product_name;
-        $data['sd']=$this->pm->by_code($params);
+    public function single($code=null){
+        if ($code==null) return redirect();
+        $data['title']=$this->pm->product_by_code($code)->product_name;
+        $data['sd']=$this->pm->product_by_code($code);
         $this->load->store('products/product', $data);
     }
     public function search(){

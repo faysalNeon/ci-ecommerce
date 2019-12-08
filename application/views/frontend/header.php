@@ -26,18 +26,18 @@
   <div class="mr-auto d-none d-lg-block">
     <ul class="navbar-nav text-uppercase">
       <?php foreach (get_category() as $pid => $parent): if($parent->top==0) continue; ?>
-        <?php if(check_category($parent->cat_id)==0):?>
+        <?php if(check_category($parent->id)==0):?>
         <li class="nav-item">
-          <a class="nav-link" href="<?=base_url('category/'.$parent->slug);?>"><?=$parent->name?></a>
+          <a class="nav-link" href="<?=base_url('category-'.$parent->id);?>"><?=$parent->name?></a>
         </li>
         <?php else:?>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="javascript:void(0);" role="button" data-toggle="dropdown"><?=$parent->name?></a>
           <div class="dropdown-menu">
-            <?php foreach (get_category($parent->cat_id) as $cid => $children):?>
-              <a class="dropdown-item" href="<?=base_url('category/'.$children->slug);?>"><?=$children->name;?></a>
+            <?php foreach (get_category($parent->id) as $cid => $children):?>
+              <a class="dropdown-item" href="<?=base_url('category-'.$children->id);?>"><?=$children->name;?></a>
             <?php endforeach;?>
-              <a class="dropdown-item" href="<?=base_url('category/'.$parent->slug);?>">View All</a>
+              <a class="dropdown-item" href="<?=base_url('category-'.$parent->id);?>">View All</a>
             </div>
           </li>
         <?php endif;?>
@@ -116,15 +116,15 @@
 </form>
 <aside class="collapse navbar-collapse collapsed navbar-toggler text-uppercase" id="appMenu">
   <?php foreach (get_category() as $pid => $parent): if($parent->top==0) continue; ?>
-  <?php if(check_category($parent->cat_id)==0):?>
-  <a href="<?=base_url('category/'.$parent->slug);?>" class="nav-link"><?=$parent->name?></a>
+  <?php if(check_category($parent->id)==0):?>
+  <a href="<?=base_url('category-'.$parent->id);?>" class="nav-link"><?=$parent->name?></a>
   <?php else:?>
   <a href="javascript:void(0);" role="button" class="nav-link" data-toggle="collapse" data-target="#child<?=$pid?>"><?=$parent->name?></a> 
   <div id="child<?=$pid?>" class="collapse" data-parent="#appMenu">
-    <?php foreach (get_category($parent->cat_id) as $cid => $children):?>
-      <a class="dropdown-item" href="<?=base_url('category/'.$children->slug);?>"><?=$children->name;?></a>
+    <?php foreach (get_category($parent->id) as $cid => $children):?>
+      <a class="dropdown-item" href="<?=base_url('category-'.$children->id);?>"><?=$children->name;?></a>
     <?php endforeach;?>
-      <a  href="<?=base_url('category/'.$parent->slug);?>" class="dropdown-item">View All</a>
+      <a  href="<?=base_url('category-'.$parent->id);?>" class="dropdown-item">View All</a>
   </div>
   <?php endif;?>
   <?php endforeach;?>

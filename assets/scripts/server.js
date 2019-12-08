@@ -1,40 +1,8 @@
-jQuery(document).ready(function($){
-	$('.table-data').each(function(){
-		$(this).DataTable({"columnDefs": [{ "targets": 'clean', "orderable": false,}] });
-	});
+$(document).ready(function() {
+  CKEDITOR.replace('rEditor',function(config) {
+    config.removeButtons = 'Save,About,Language,NewPage,Preview,Print,Templates,Scayt,Form,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField';
+  });
 });
-
-// sidebar
-function sidebarFactory(active=localStorage.getItem('menu')){
-  var thisClass='change';
-  var thsiBar=$('aside.app-sidebar');
-  var thisBody=$('main.app-body');
-  var thisFooter=$('footer.app-footer');
-  if(active==true){
-    thsiBar.addClass(thisClass);
-    thisBody.addClass(thisClass);
-    thisFooter.addClass(thisClass);
-  }else{
-    thsiBar.removeClass(thisClass);
-    thisBody.removeClass(thisClass);
-    thisFooter.removeClass(thisClass);
-  }
-}
-$(function(){
-  if (typeof(Storage) !== "undefined"){
-    sidebarFactory(localStorage.getItem('menu'));
-    console.log(localStorage.getItem('menu'));
-  }
-})
-function toggleSidebar(){
-  if($('aside.app-sidebar').hasClass('change')){
-    localStorage.setItem('menu', false);
-    sidebarFactory(false)
-  }else{
-    localStorage.setItem('menu', true);
-    sidebarFactory(true)
-  }
-}
 // end menu transition 
 $(function(){
   var menu = $('.sidebar-menu');

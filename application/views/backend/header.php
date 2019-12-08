@@ -2,22 +2,26 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<base id="server_url" href="<?=base_url('server')?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title><?= $title?$title:setting('store_name')?></title>
 	<link href="//fonts.gstatic.com" rel="dns-prefetch">
+	<link rel="icon" type="image/x-icon" href="<?=base_url('assets/images/favicon.ico')?>">
 	<link href="<?=base_url();?>assets/vendors/mdi/css/materialdesignicons.min.css" rel="stylesheet" >
 	<script src="<?=base_url();?>assets/vendors/jquery-3.4.1.min.js"></script>
+	<script src="<?=base_url();?>assets/vendors/Croppie/croppie.min.js"></script>
 	<link href="<?=base_url();?>assets/vendors/bootstrap/bootstrap.min.css" rel="stylesheet">
 	<script src="<?=base_url();?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
-	<link href="<?=base_url();?>assets/vendors/datatables/datatables.min.css" rel="stylesheet"/>
+	<link href="<?=base_url();?>assets/vendors/datatables/datatables.css" rel="stylesheet"/>
+	<link href="<?=base_url();?>assets/vendors/Croppie/croppie.css" rel="stylesheet"/>
 	<link href="<?=base_url();?>assets/styles/server.css" rel="stylesheet"/>
 </head>
 <body>
 <div id="appRoot">
-<aside class="app-sidebar">
+<aside class="app-sidebar <?=menu_toggle('active')?>">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="<?=base_url()?>"> Project Server </a>
+		<a class="navbar-brand" href="<?=base_url()?>"> <?=setting('store_name')?>  </a>
 	</nav>
 	<ul class="sidebar-menu">
 		<li>
@@ -27,70 +31,50 @@
 			</a>
 		</li>
 		<li class="header"> Catalog </li>
-		<li class="treeview">
-			<a href="javascript:void(0)"><i class="mdi mdi-ballot"></i><span class="mtxt"> Product </span></a>
-			<ul class="treeview-menu" style="display: none;">
-				<li><a href="<?=base_url('server')?>"><i class="mdi mdi-package-down"></i> <span class='mtxt'> New Product </span></a></li>
-				<li><a href="<?=base_url('server')?>"><i class="mdi mdi-clipboard-text-outline"></i> <span class='mtxt'> List Product </span></a></li>
-				<li><a href="<?=base_url('server')?>"><i class="mdi mdi-codepen"></i><span class='mtxt'> Feature Product </span></a></li>
-			</ul>
-		</li>
-		<li class="treeview">
-			<a href="javascript:void(0)">
-				<i class="mdi mdi-folder-open-outline"></i>
-				<span class='mtxt'> Category </span>
-			</a>
-			<ul class="treeview-menu" style="display: none;">
-				<li><a href="<?=base_url('server')?>"><i class="mdi mdi-folder-text-outline"></i> <span class='mtxt'> New Category </span> </a></li>
-				<li><a href="<?=base_url('server')?>"><i class="mdi mdi-folder-plus-outline"></i> <span class='mtxt'> List Category </span> </a></li>
-			</ul>
-		</li>
+		<li><a href="<?=base_url('server/categories')?>"><i class="mdi mdi-folder-plus-outline"></i> <span class='mtxt'> Categories </span> </a></li>
+		<li><a href="<?=base_url('server/products')?>"><i class="mdi mdi-clipboard-text-outline"></i> <span class='mtxt'> Products </span></a></li>
+		<li><a href="<?=base_url('server/products/features')?>"><i class="mdi mdi-codepen"></i><span class='mtxt'> Feature Product </span></a></li>
 		<li class="header"> Customer & Order </li>
-		<li><a href="<?=base_url('server')?>"><i class="mdi mdi-account-group"></i><span class='mtxt'> List Customer </span> </a></li>
-		<li><a href="<?=base_url('server')?>"><i class="mdi mdi-clipboard-list"></i><span class='mtxt'> Manage Order </span> </a></li>
-		<li class="treeview">
-			<a href="javascript:void(0)">
-				<i class="mdi mdi-gift-outline"></i><span class="mtxt"> Cupon </span>
-			</a>
-			<ul class="treeview-menu" style="display: none;">
-				<li><a href="<?=base_url('server')?>"><i class="mdi mdi-package-down"></i><span class='mtxt'> New Cupon </span> </a></li>
-				<li><a href="<?=base_url('server')?>"><i class="mdi mdi-package-variant-closed"></i><span class='mtxt'> List Cupon </span> </a></li>
-			</ul>
-		</li>
-		<li><a href="<?=base_url('server')?>"><i class="mdi mdi-cash-usd-outline"></i><span class='mtxt'> Manage Payment </span></a></li>
+		<li><a href="<?=base_url('server/shopping/customers')?>"><i class="mdi mdi-account-group"></i><span class='mtxt'> Customers </span> </a></li>
+		<li><a href="<?=base_url('server/shopping/orders')?>"><i class="mdi mdi-clipboard-list"></i><span class='mtxt'> Manage Order </span> </a></li>
 		<li class="header"> Settings </li>
 		<li class="treeview">
 			<a href="javascript:void(0)">
 				<i class="mdi mdi-file-outline"></i><span class="mtxt"> Appearance </span>
 			</a>
 			<ul class="treeview-menu" style="display: none;">
-				<li><a href="<?=base_url('server')?>"><i class="mdi mdi-monitor-multiple"></i><span class='mtxt'> Slider List </span></a></li>
-				<li><a href="<?=base_url('server')?>"><i class="mdi mdi-file-replace"></i><span class='mtxt'> List Page </span></a></li>
+				<li><a href="<?=base_url('server/settings/sliders')?>"><i class="mdi mdi-monitor-multiple"></i><span class='mtxt'> Sliders </span></a></li>
+				<li><a href="<?=base_url('server/settings/banners')?>"><i class="mdi mdi-monitor-multiple"></i><span class='mtxt'> Banners </span></a></li>
+				<li><a href="<?=base_url('server/settings/pages')?>"><i class="mdi mdi-file-replace"></i><span class='mtxt'> Pages </span></a></li>
 			</ul>
 		</li>
-		<li><a href="<?=base_url('server')?>"><i class="mdi mdi-account-details"></i> <span class='mtxt'> Users </span></a></li>
-		<li><a href="<?=base_url('server')?>"><i class="mdi mdi-settings"></i> <span class='mtxt'> Options </span></a></li>
+		<li><a href="<?=base_url('server/settings/users')?>"><i class="mdi mdi-account-details"></i> <span class='mtxt'> Users </span></a></li>
+		<li><a href="<?=base_url('server/settings')?>"><i class="mdi mdi-settings"></i> <span class='mtxt'> Options </span></a></li>
 	</ul>
 </aside>
 <header class="app-header">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="brand">
-			<a class="navbar-brand text-uppercase" href="<?=base_url('server')?>"> Project Server </a>
+			<a class="navbar-brand text-uppercase" href="<?=base_url('server')?>"><?=setting('store_name')?> </a>
 		</div>
 		<button type="button" onClick="toggleSidebar()" class="btn btn-outline-info">
 			<i class="mdi mdi-menu"></i>
 		</button>
-		<div class="menu ml-auto">
+		<a href="<?=base_url()?>" target="_blank" class="ml-auto  btn-sm mr-1 btn btn-outline-info">
+			<i class="mdi mdi-home"></i>
+		</a>
+		<div class="menu ">
 			<div class="dropdown">
-				<button type="button" class="btn btn-sm btn-outline-info mr-1" data-toggle="dropdown">
+				<button type="button" class="btn btn-sm btn-outline-info mx-1" data-toggle="dropdown">
 					<i class="mdi mdi-account-circle-outline"></i>
 				</button>
 				<div class="dropdown-menu">
 					<div class="card shadow-2">
 						<div class="card-body text-center pt-5">
-							<img src="https://placeholder.pics/svg/100/237BD5/FFFFFF-237BD5" class="mb-2 rounded-circle" alt="User Profile" width="100" height="100"> 
-							<h4 class="name">Faysal Neon</h4>
-							<p class="email">faysal.neon@gmail.com</p>
+							<img src="<?=user_data('photo')?>" class="mb-2 rounded-circle" alt="User Profile" width="100" height="100"> 
+							<h4 class="name"><?=user_data('name')?></h4>
+							<p class="mobile"><?=user_data('mobile')?></p>
+							<p class="email"><?=user_data('email')?></p>
 							<a href="<?=base_url('profile')?>" class="btn btn-profile btn-outline-secondary"> Manage Your Account </a>
 						</div>
 					</div>
@@ -134,6 +118,20 @@
   </div>
   <script>$(function(){$('.toast').toast('show')})</script>
 <?php $this->session->unset_userdata('alert'); endif;?>
-<main class="app-body">
+<script>
+function toggleSidebar(){
+	if($('aside.app-sidebar').hasClass('active')){
+	  $('aside.app-sidebar').removeClass('active');
+	  $('main.app-body').removeClass('active');
+	  $('footer.app-footer').removeClass('active');
+	}else{
+		$('aside.app-sidebar').addClass('active');
+		$('main.app-body').addClass('active');
+		$('footer.app-footer').addClass('active');
+	}
+	$.ajax({url:'<?=base_url('server/settings/menu_toggle')?>', method:'POST'})
+}
+</script>
+<main class="app-body <?=menu_toggle('active')?>">
 
 

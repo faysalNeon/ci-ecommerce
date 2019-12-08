@@ -6,7 +6,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['server']='server/dashboard';
 // front view
 $route['product/(:any)']='products/single/$1';
-$route['category/(:any)']='products/category/$1';
+$route['category-(:num)']='products/category/$1';
 
 $route['login']='account/login';
 $route['register']='account/register';

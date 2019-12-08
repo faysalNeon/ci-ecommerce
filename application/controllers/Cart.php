@@ -9,8 +9,8 @@
         $this->load->store('shopping/cart',$data);
     }
     public function add($cart_id, $cart_qty=1){
-        $pd = $this->db->get_where('products',array('product_id'=>$cart_id))->row();
-        $this->cart->insert(array('id' => $pd->product_id,'product_id' => $pd->product_code, 'qty' => $cart_qty, 'price' => $pd->price, 'name' => $pd->name, 'thumb' => $pd->thumb ));
+        $pd = $this->db->get_where('products',array('id'=>$cart_id))->row();
+        $this->cart->insert(array('id' => $pd->id,'product_id' => $pd->code, 'qty' => $cart_qty, 'price' => $pd->price, 'name' => $pd->name, 'thumb' => $pd->thumb ));
         $data['alert']=array(
             'status'=>'success',
             'title'=>'Product Added',
@@ -70,6 +70,17 @@
         $cart_data=$this->cart->contents();
         $this->output->set_content_type('application/json');
         $this->output->set_output(json_encode($cart_data));
+        $this->output->get_output();
+    }
+    public function step($id){
+        if($this->session->has_userdata('step')){
+            $this->session->set_userdata('step', $id);
+        }else{
+            $this->session->set_userdata('step', 1);
+        }
+        if (!$this->input->is_ajax_request()){ redirect(); die;}
+        $this->output->set_content_type('application/json');
+        $this->output->set_output(json_encode($this->session->userdata('step')));
         $this->output->get_output();
     }
  }

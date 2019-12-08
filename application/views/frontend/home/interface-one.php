@@ -1,6 +1,6 @@
 <section class='area-home'>
     <div class="home-slider">
-        <?php foreach ($sliderData as $key => $item): if($item->status===0) continue;?>
+        <?php foreach ($this->hm->slider() as $key => $item): if($item->status===0) continue;?>
         <div class="item">
             <img src="<?=$item->thumb?>" alt="" class="fluid" style="width:100vw">
             <div class="content">
@@ -21,7 +21,7 @@
 <section class="area-banner">
     <div class="container">
         <div class="row py-4 mb-4">
-            <?php foreach ($bannerData as $key => $item):?>
+            <?php foreach ($this->hm->banner() as $key => $item):?>
             <div class="col-md-4 mt-4">
                 <div class="card card-banner text-center">
                     <img class="card-img-top" src="<?=$item->thumb?>" alt="<?=$item->title?>">
@@ -43,18 +43,18 @@
             <article class="col-12">
                 <h3 class="pb-3 text-center text-uppercase">Feature Products</h3>
                 <div class="feature-slider">
-                    <?php foreach ($featureData as $key => $item):?>
+                    <?php foreach ($this->hm->feature() as $key => $item):?>
                     <div class="item p-1">
                         <div class="card card-product">
                             <img class="card-img-top" src="<?=$item->thumb?>" alt="<?=$item->name?>">
                             <div class="card-body">
-                                <b class="product-price"><?=$item->price?> <del class="text-danger"><sup><?=$item->price?></sup></del></b>
+                                <b class="product-price"><?=$item->offer?> <del class="text-danger"><sup><?=$item->price?></sup></del></b>
                                 <h5 class="card-title"><?=$item->name?></h5>
                             </div>
                             <div class="card-img-overlay">
                                 <div class="card-action">
-                                    <a class="btn btn-details btn-sm btn-block btn-secondary text-uppercase" href="<?=base_url('product/'.$item->product_code)?>">View Details</a>
-                                   <button type="button" onClick="addCart(<?=$item->product_id?>)" class="mt-3 btn btn-cart btn-sm btn-block btn-warning text-uppercase">Add To Cart</button>
+                                    <a class="btn btn-details btn-sm btn-block btn-secondary text-uppercase" href="<?=base_url('product/'.$item->code)?>">View Details</a>
+                                   <button type="button" onClick="addCart(<?=$item->id?>)" class="mt-3 btn btn-cart btn-sm btn-block btn-warning text-uppercase">Add To Cart</button>
                                 </div>
                             </div>
                         </div>
@@ -71,18 +71,18 @@
             <article class="col-12">
                 <h3 class="pb-3 text-center text-uppercase">New Collection</h3>
                 <div class="feature-slider">
-                <?php foreach ($newData as $key => $item):?>
+                <?php foreach ($this->hm->recent() as $key => $item):?>
                     <div class="item p-1">
                         <div class="card card-product">
                             <img class="card-img-top" src="<?=$item->thumb?>" alt="<?=$item->name?>">
                             <div class="card-body">
-                                <b class="product-price"><?=$item->price?> <del class="text-danger"><sup><?=$item->price?></sup></del></b>
+                                <b class="product-price"><?=$item->offer?> <del class="text-danger"><sup><?=$item->price?></sup></del></b>
                                 <h5 class="card-title"><?=$item->name?></h5>
                             </div>
                             <div class="card-img-overlay">
                                 <div class="card-action">
-                                    <a class="btn btn-details btn-sm btn-block btn-secondary text-uppercase" href="<?=base_url('product/'.$item->product_code)?>">View Details</a>
-                                   <button type="button" onClick="addCart(<?=$item->product_id?>)" class="mt-3 btn btn-cart btn-sm btn-block btn-warning text-uppercase">Add To Cart</button>
+                                    <a class="btn btn-details btn-sm btn-block btn-secondary text-uppercase" href="<?=base_url('product/'.$item->code)?>">View Details</a>
+                                   <button type="button" onClick="addCart(<?=$item->id?>)" class="mt-3 btn btn-cart btn-sm btn-block btn-warning text-uppercase">Add To Cart</button>
                                 </div>
                             </div>
                         </div>

@@ -1,4 +1,13 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
+if (!function_exists('menu_toggle')) {
+    function menu_toggle($value=''){
+        $data = true;
+        $gi = &get_instance();
+        if($gi->session->has_userdata('menu_active')){ $data= $gi->session->userdata('menu_active'); }
+        if($data==true){ return $value; }
+    }
+}
+
 //--------- header css js--------//
 if(!function_exists('add_style')){
     function add_style($file='',$type=FALSE){

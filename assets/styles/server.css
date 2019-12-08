@@ -2,13 +2,19 @@
 ::-webkit-scrollbar-track { background: #343a40;}
 ::-webkit-scrollbar-thumb { border-radius: 4px; background: #3199b3;}
 ::-webkit-scrollbar:hover { border: none; background: black;}
+
+table.dataTable tbody th, 
+table.dataTable tbody td{
+	vertical-align: middle;
+}
+
 /* End Global CSS  */
 header.app-header {
 	top: 0;
     left: 0;
 	right: 0;
 	width: 100%;
-	z-index: 10000;
+	z-index: 999;
     position: fixed;
 }
 header.app-header .brand{
@@ -43,6 +49,7 @@ aside.app-sidebar{
 	top: 0;
 	left: -260px;
 	width: 260px;
+	z-index: 888;
 	height: 100vh;
 	position: fixed;
 	overflow-y: auto;
@@ -50,7 +57,7 @@ aside.app-sidebar{
 	transition: all 0.5s ease;
 	background-color: #222d32;
 }
-aside.app-sidebar.change{
+aside.app-sidebar.active{
 	left: 0!important;
 }
 .sidebar-menu{
@@ -144,12 +151,12 @@ aside.app-sidebar.change{
 /* End Sidebar Area  */
 main.app-body{
 	margin-left: 0;
-	margin-top: 58px;
-	min-height: 90vh;
+	margin-top: 75px;
+	min-height: 95vh;
 	transition: all 0.5s ease;
 }
 @media (min-width:991px){
-	main.app-body.change{
+	main.app-body.active{
 		margin-left: 260px!important;
 	}
 }
@@ -163,7 +170,7 @@ footer.app-footer{
 	background-color: #1a2226;
 }
 @media (min-width:991px){
-	footer.app-footer.change{
+	footer.app-footer.active{
 		margin-left: 260px!important;
 	}
 }

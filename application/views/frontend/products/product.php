@@ -9,26 +9,21 @@
                     <div class="col-12">
                         <h6 class="m-3"><b>Code: </b><span class="badge badge-info"><?=$sd->product_code?></span></h6>
                         <h3 class="my-4"> <b>Name: </b> <?=$sd->product_name?></h3>
-                        <p class="m-3"> <b>Category: </b> <?=$sd->cat_name?></p>
+                        <p class="m-3"> <b>Category: </b> <?=$sd->category_name?></p>
                         <p class="m-3"><?=$sd->product_details?></p>
                         <div class="p-5">
-                            <b>Price:</b> <?=$sd->product_price?> 
+                            <b>Offer Price:</b> <?=$sd->product_offer?> 
                             <br>
-                            <b class="text-danger">Old Price:
-                                <s><?=$sd->product_old_price?></s>
+                            <b class="text-danger">Price:
+                                <s><?=$sd->product_price?></s>
                             </b> 
                         </div>
                     </div>
                     <div class="col-12">
                         <form class="row" action="<?=base_url('cart/add_load')?>" method="POST">
                             <div class="col-5">
-                                <?php if(empty(cart($sd->product_id)['rowid'])):?>
                                 <input type="hidden" name="id" value="<?=$sd->product_id?>">
                                 <input type="number" name="qty" class="form-control" value="1" min="1" max="500">
-                                <?php else:?>
-                                <input type="hidden" name="rowid" value="<?=cart($sd->product_id)['rowid']?>">
-                                <input type="number" name="qty" class="form-control input-qty" value="<?=cart($sd->product_id)['qty'];?>" min="1" max="500">
-                                <?php endif;?>
                             </div>
                             <div class="col-7">
                                 <button type="submit" class="btn btn-block btn-warning"> Add To Cart</button>

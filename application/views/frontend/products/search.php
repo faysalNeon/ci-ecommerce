@@ -24,7 +24,7 @@
 function searchFactory(){
     var display=$('#searchData');
     var inputData=$('#instantSearch').val();
-    var dataUrl='<?=base_url()?>/products/search';
+    var dataUrl='<?=base_url('products/search')?>';
     if(inputData.length>0){
         $.ajax({
             url: dataUrl,
@@ -41,12 +41,11 @@ function searchFactory(){
                             <div class='card-body'>
                                 <img class="float-left mr-2" src="${el.product_thumb}" alt="${el.product_name}" width="120">
                                 <div>
-                                    <h6><b>Category: </b>${el.cat_name}</h6>
+                                    <h6><b>Category: </b>${el.category_name}</h6>
                                     <h4><b>Product: </b>${el.product_name}</h4>
                                     <b class="badge badge-info">${el.product_code}</b> | 
-                                    <b class="badge badge-success">${el.product_price}</b> | 
-                                    <s class="badge badge-danger">${el.product_old_price}</s>
-                                    <p>${el.product_details}</p>
+                                    <b class="badge badge-success">${el.product_offer}</b> | 
+                                    <s class="badge badge-danger">${el.product_price}</s>
                                 </div>
                             </div>
                             <div class="card-footer p-1">

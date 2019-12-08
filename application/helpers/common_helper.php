@@ -4,14 +4,13 @@ if(!function_exists('user_data')){
         $gi = & get_instance();
         $gi->load->database();
         $gi->load->library('session');
-        if(empty($gi->session->userdata('id'))){
-            return false;
-        }else{
+        if(empty($gi->session->userdata('id'))){ return false; }else{
             if(empty($gi->session->userdata('role'))){
-                return $gi->db->get_where('customers', array('customer_id'=>$gi->session->userdata('id')))->row($key);
+                $result = $gi->db->get_where('customers', array('id'=>$gi->session->userdata('id')))->row($key);
             }else{
-                return $gi->db->get_where('users', array('user_id'=>$gi->session->userdata('id'), 'role'=>$gi->session->userdata('role')))->row($key);
+                $result = $gi->db->get_where('users', array('id'=>$gi->session->userdata('id'), 'role'=>$gi->session->userdata('role')))->row($key);
             }
+            if($key=='photo'){ if(@getimagesize($result)){ return $result; }else{ return base_url('assets/images/user.png');} }else{ return $result; }
         }
     }
 }
@@ -45,6 +44,18 @@ if(!function_exists('get_category')){
         return $fc->get_where('categories',array('status'=>1))->result();
     }
 }
+if(!function_exists('cat_parent')){
+    function cat_parent($id){
+        $gi = & get_instance();
+        $gi->load->database();
+        $data = $gi->db->get_where('categories',array('id'=> $id ))->row('name');
+        if($data){
+            return $data;
+        }else{
+            return "No Parent";
+        }
+    }
+}
 if(!function_exists('check_category')){
     function check_category($id=0){
         $cp=false;
@@ -71,8 +82,6 @@ if(!function_exists('cart')){
 
     }
 }
-
-
 //--------- header css js--------//
 if(!function_exists('redirect_error')){
     function redirect_error(){
@@ -96,4 +105,14 @@ if(!function_exists('check_thumb')){
     }
 }
 
+if(!function_exists('step')){
+    function step($id=1){
+        $ci = &get_instance();
+        if($ci->session->has_userdata('step')){
+            return $ci->session->userdata('step')==$id?"show":null;
+        }else{
+          return $id==1?"show":null;  
+        }
+    }
+}
 
