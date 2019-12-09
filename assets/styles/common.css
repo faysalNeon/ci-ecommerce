@@ -152,6 +152,7 @@ label:focus,
     bottom:10%;
 }
 /* end banner area  */
+section.area-step,
 section.area-feature {
     background-color: #fdf4bd;
 }

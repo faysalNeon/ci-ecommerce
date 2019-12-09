@@ -18,15 +18,19 @@ if(!function_exists('access')){
     function access($dep=0){
         $gi = & get_instance();
         $gi->load->library('session');
-        if($dep==0){
-            if (!empty($gi->session->userdata('id'))) { return true; }else{ return null; }
-        }else{
-            if(!empty($gi->session->userdata('id'))){
-                if (!empty($gi->session->userdata('role'))) { return true; }else{ return null; }
+        if($gi->session->userdata('status')==1){
+            if($dep==0){
+                if (!empty($gi->session->userdata('id'))) { return true; }else{ return null; }
             }else{
-                return null;
+                if(!empty($gi->session->userdata('id'))){
+                    if (!empty($gi->session->userdata('role'))) { return true; }else{ return null; }
+                }else{
+                    return null;
+                }
             }
-        }
+        }else{
+            return null;
+        } 
     }
 }
 if(!function_exists('setting')){

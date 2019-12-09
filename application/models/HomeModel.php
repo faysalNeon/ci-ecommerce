@@ -63,4 +63,20 @@ class HomeModel extends CI_Model{
             return $this->db->get_where('shipping_methods',array('status'=>1))->result();
         }
     }
+    public function country_list(){
+        return (object)array(
+            (object)array('id'=>1,'name'=>'Bangladesh'),
+            (object)array('id'=>2,'name'=>'Aaudi Arabia'),
+            (object)array('id'=>3,'name'=>'Australia'),
+            (object)array('id'=>4,'name'=>'Thailand'),
+            (object)array('id'=>5,'name'=>'Malaysia'),
+            (object)array('id'=>6,'name'=>'America'),
+            (object)array('id'=>7,'name'=>'london'),
+            (object)array('id'=>8,'name'=>'Mexico'),
+            (object)array('id'=>9,'name'=>'Canada'),
+            (object)array('id'=>10,'name'=>'India'),
+            (object)array('id'=>11,'name'=>'China'),
+            (object)array('id'=>12,'name'=>'Japan')
+        );
+    }
 }

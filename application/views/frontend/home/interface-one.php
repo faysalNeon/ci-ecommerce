@@ -1,3 +1,4 @@
+<?php if(count($this->hm->slider())):?>
 <section class='area-home'>
     <div class="home-slider">
         <?php foreach ($this->hm->slider() as $key => $item): if($item->status===0) continue;?>
@@ -18,6 +19,8 @@
         <?php endforeach;?>
     </div>
 </section>
+<?php endif?>
+<?php if(count($this->hm->banner())):?>
 <section class="area-banner">
     <div class="container">
         <div class="row py-4 mb-4">
@@ -37,6 +40,8 @@
         </div>
     </div>
 </section>
+<?php endif?>
+<?php if(count($this->hm->feature())):?>
 <section class="area-feature">
     <div class="container">
         <div class="row py-4">
@@ -65,13 +70,15 @@
         </div>
     </div>
 </section>
+<?php endif?>
+<?php if(count($this->hm->recent())):?>
 <section class="area-new">
     <div class="container">
         <div class="row py-4">
             <article class="col-12">
                 <h3 class="pb-3 text-center text-uppercase">New Collection</h3>
                 <div class="feature-slider">
-                <?php foreach ($this->hm->recent() as $key => $item):?>
+                <?php foreach($this->hm->recent() as $key => $item):?>
                     <div class="item p-1">
                         <div class="card card-product">
                             <img class="card-img-top" src="<?=$item->thumb?>" alt="<?=$item->name?>">
@@ -93,8 +100,9 @@
         </div>
     </div>
 </section>
+<?php endif?>
 <section class="area-step">  
-    <div class="container">
+    <div class="container py-5">
         <div class="row text-center text-secondary">
             <div class="col-md-6 col-lg-3 mb-2">
                 <div class="card">

@@ -18,7 +18,7 @@
 								<div class="text-center">
 									<h3>Hello! Dear <b><?=user_data('name')?></b></h3>
 									<p>You have successfully completed step one</p>
-									<button type="button" class="btn btn-secondary" onClick="next(2)">continue</buttona>
+									<button type="button" class="btn btn-info w-25" onClick="next(2)">continue</buttona>
 								</div>
 								<?php else:?>
 								<ul class="nav nav-tabs justify-content-center">
@@ -83,7 +83,7 @@
 								<i class="float-right mdi mdi-lock-outline"></i>
 							</h6>
 						</div>
-						<div id="step_2" class="collapse <?=step(2)?>" data-parent="#checkoutGroup">
+						<form id="step_2" class="collapse <?=step(2)?>" data-parent="#checkoutGroup">
 							<div class="card-body">
 								<div class="form-group">
 									<label for="inputAddress">Address</label>
@@ -98,11 +98,9 @@
 										<label for="inputCountry">Country</label>
 										<select id="inputCountry" class="form-control" name="country" require>
 											<option selected>Chose One</option>
-											<option value="Bangladesh">Bangladesh</option>
-											<option value="Australia">Australia</option>
-											<option value="United State">United State</option>
-											<option value="United Kingdom">United Kingdom</option>
-											<option value="United arab emirates">United Arab Emirates</option>
+											<?php foreach ($this->hm->country_list() as $key => $value):?>
+											<option value="<?=$value->name;?>"><?=$value->name;?></option>
+											<?php endforeach?>
 										</select>
 									</div>
 									<div class="form-group col-md-2">
@@ -123,7 +121,7 @@
 								<button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#step_1">back</buttona>
 								<button type="button" class="btn btn-secondary" onClick="next(3)">continue</buttona>
 							</div>
-						</div>
+						</form>
 					</article>
 					<article class="card">
 						<div class="card-header">
@@ -133,7 +131,7 @@
 								<i class="float-right mdi mdi-lock-outline"></i>
 							</h6>
 						</div>
-						<div id="step_3" class="collapse <?=step(3)?>" data-parent="#checkoutGroup">
+						<form id="step_3" class="collapse <?=step(3)?>" data-parent="#checkoutGroup">
 							<div class="card-body">
 								<small class="mb-1">Please select the preferred payment method to use on this
 									order.</small>
@@ -158,7 +156,7 @@
 								<button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#step_1">back</buttona>
 								<button type="button" class="btn btn-secondary" onClick="next(4)">continue</buttona>
 							</div>
-						</div>
+						</form>
 					</article>
 					<article class="card">
 						<div class="card-header">
@@ -168,7 +166,7 @@
 								<i class="float-right mdi mdi-lock-outline"></i>
 							</h6>
 						</div>
-						<div id="step_4" class="collapse <?=step(4)?>" data-parent="#checkoutGroup">
+						<form id="step_4" class="collapse <?=step(4)?>" data-parent="#checkoutGroup">
 							<div class="card-body">
 								<small class="mb-1">Please select the preferred payment method to use on this
 									order.</small>
@@ -191,11 +189,10 @@
 								</div>
 							</div>
 							<div class="p-0 m-2  d-flex justify-content-between">
-								<button type="button" class="btn btn-secondary" data-toggle="collapse"
-									data-target="#step_2">back</buttona>
-									<button type="button" class="btn btn-secondary" onClick="next(4)">continue</buttona>
+								<button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#step_2">back</buttona>
+								<button type="button" class="btn btn-secondary" onClick="next(5)">continue</buttona>
 							</div>
-						</div>
+						</form>
 					</article>
 					<article class="card">
 						<div class="card-header">
@@ -205,77 +202,115 @@
 								<i class="float-right mdi mdi-lock-outline"></i>
 							</h6>
 						</div>
-						<div id="step_5" class="collapse <?=step(5)?>" data-parent="#checkoutGroup">
+						<form id="step_5" class="collapse <?=step(5)?>" data-parent="#checkoutGroup">
 							<div class="card-body">
-								<h6 class="my-2">Customer Information</h6>
+								<h6 class="text-success">Personal</h6>
 								<div class="table-responsive table-sm text-center">
 									<table class="table table-bordered" style="min-width:1000px">
 										<thead>
-											<tr>
-												<th class="text-left">Name</th>
-												<th width="200">Code</th>
-												<th width="200">Quantity</th>
-												<th width="100">Unit Price</th>
-												<th width="120">Sub Total</th>
-											</tr>
+											<th>Name</th>
+											<th>Mobile</th>
+											<th>Email</th>
 										</thead>
 										<tbody>
-											<?php foreach ($this->cart->contents() as $key => $item):?>
 											<tr>
-												<td class="text-left"><?=$item['name']?></td>
-												<td><?=$item['product_id']?></td>
-												<td><?=$item['qty']?></td>
-												<td>$<?=$this->cart->format_number($item['price'])?></td>
-												<td>$<?=$this->cart->format_number($item['subtotal'])?></td>
-											</tr>
-											<?php endforeach;?>
-
-											<tr class="table-warning">
-												<td colspan="6"></td>
-											</tr>
-											<tr>
-												<td colspan="2"></td>
-												<td colspan="2" class="text-right">Total Price:</td>
-												<td>$<?=$this->cart->format_number($this->cart->total());?></td>
+												<td><?=user_data('name')?></td>
+												<td><?=user_data('mobile')?></td>
+												<td><?=user_data('email')?></td>
 											</tr>
 										</tbody>
 									</table>
 								</div>
-								<h6 class="my-2">Shipping Information</h6>
-								<div class="table-responsive table-sm text-center">
-									<table class="table table-bordered" style="min-width:1000px">
-										<thead>
-											<tr>
-												<th class="text-left">Name</th>
-												<th width="200">Code</th>
-												<th width="200">Quantity</th>
-												<th width="100">Unit Price</th>
-												<th width="120">Sub Total</th>
-											</tr>
-										</thead>
-										<tbody>
-											<?php foreach ($this->cart->contents() as $key => $item):?>
-											<tr>
-												<td class="text-left"><?=$item['name']?></td>
-												<td><?=$item['product_id']?></td>
-												<td><?=$item['qty']?></td>
-												<td>$<?=$this->cart->format_number($item['price'])?></td>
-												<td>$<?=$this->cart->format_number($item['subtotal'])?></td>
-											</tr>
-											<?php endforeach;?>
-
-											<tr class="table-warning">
-												<td colspan="6"></td>
-											</tr>
-											<tr>
-												<td colspan="2"></td>
-												<td colspan="2" class="text-right">Total Price:</td>
-												<td>$<?=$this->cart->format_number($this->cart->total());?></td>
-											</tr>
-										</tbody>
-									</table>
+								<h6 class="mt-3 text-success">Address</h6>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="table-responsive table-sm">
+											<table class="table table-bordered" style="min-width:300px">
+												<thead>
+													<tr>
+														<th colspan="2" class='text-center'>Home Address</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<th width="80">Address</th>
+														<td>esvos</td>
+													</tr>
+													<tr>
+														<th>City</th>
+														<td>efdasfsaf</td>
+													</tr>
+													<tr>
+														<th>Country</th>
+														<td>Bangladesh</td>
+													</tr>
+													<tr>
+														<th>Zip</th>
+														<td>1230</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="table-responsive table-sm">
+											<table class="table table-bordered" style="min-width:300px">
+												<thead>
+													<tr>
+														<th colspan="2" class='text-center'>Shipping Address</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<th width="80">Address</th>
+														<td>fdsafsafsa</td>
+													</tr>
+													<tr>
+														<th>City</th>
+														<td>fdsafsafsa</td>
+													</tr>
+													<tr>
+														<th>Country</th>
+														<td>Bangladesh</td>
+													</tr>
+													<tr>
+														<th>Zip</th>
+														<td>1230</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="col-12">
+										<div class="table-responsive table-sm">
+											<table class="table table-bordered" style="min-width:300px">
+												<tr>
+													<th width="150">Payment Method:</th>
+													<td>Cash On Delivary</td>
+												</tr>
+												<tr>
+													<td colspan="2">Delivary comment info</td>
+												</tr>
+											</table>
+										</div>
+									</div>
+									<div class="col-12">
+										<div class="table-responsive table-sm">
+											<table class="table table-bordered" style="min-width1000px">
+												<tr>
+													<th width="150">Shipping Method:</th>
+													<td>Free shipping</td>
+													<th width="150" class="text-right">Shipping Charge:</th>
+													<td width="100" class="text-right">$0.00</td>
+												</tr>
+												<tr>
+													<td colspan="4">Shipping comment info</td>
+												</tr>
+											</table>
+										</div>
+									</div>
 								</div>
-								<h6 class="my-2">Shipping Information</h6>
+								<h6 class="mt-3 text-success">Products</h6>
 								<div class="table-responsive table-sm text-center">
 									<table class="table table-bordered" style="min-width:1000px">
 										<thead>
@@ -283,8 +318,8 @@
 												<th class="text-left">Name</th>
 												<th width="200">Code</th>
 												<th width="200">Quantity</th>
-												<th width="100">Unit Price</th>
-												<th width="120">Sub Total</th>
+												<th width="100" class="text-right">Unit Price</th>
+												<th width="120" class="text-right">Sub Total</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -293,20 +328,23 @@
 												<td class="text-left"><?=$item['name']?></td>
 												<td><?=$item['product_id']?></td>
 												<td><?=$item['qty']?></td>
-												<td>$<?=$this->cart->format_number($item['price'])?></td>
-												<td>$<?=$this->cart->format_number($item['subtotal'])?></td>
+												<td class="text-right">$<?=$this->cart->format_number($item['price'])?></td>
+												<td class="text-right">$<?=$this->cart->format_number($item['subtotal'])?></td>
 											</tr>
 											<?php endforeach;?>
-
-											<tr class="table-warning">
-												<td colspan="6"></td>
+										</tbody>
+										<tfooter>
+											<tr>
+												<th colspan="2"></th>
+												<th colspan="2" class="text-right">Shipping Charge:</th>
+												<th class="text-right">$0.00</th>
 											</tr>
 											<tr>
-												<td colspan="2"></td>
-												<td colspan="2" class="text-right">Total Price:</td>
-												<td>$<?=$this->cart->format_number($this->cart->total());?></td>
+												<th colspan="2"></th>
+												<th colspan="2" class="text-right">Total Price:</th>
+												<th class="text-right">$<?=$this->cart->format_number($this->cart->total());?></th>
 											</tr>
-										</tbody>
+										</tfooter>
 									</table>
 								</div>
 								<div class="p-0 m-2  d-flex justify-content-between">
@@ -314,7 +352,7 @@
 									<button type="submit" class="btn btn-secondary">Confirm Order</buttona>
 								</div>
 							</div>
-						</div>
+						</form>
 					</article>
 				</section>
 			</div>
@@ -327,8 +365,8 @@
 			url : '<?=base_url('cart/step/')?>'+$id,
 			type : "POST",
 			success:function(step){
-				
-				console.log(step);
+				location.reload();
+				// console.log(step);
 			}
 		})
 	}

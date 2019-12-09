@@ -10,7 +10,7 @@
 				<div class="table-responsive text-center">
 					<table class="table table-bordered" style="min-width:1000px">
 						<thead>
-							<tr>
+							<tr class="table-primary">
 								<th width="80">Image</th>
 								<th width="150">Product Code</th>
 								<th class="text-left">Name</th>
@@ -24,8 +24,7 @@
 							<tr class="table-danger">
 								<td colspan="6"><b>Empty Cart</b></td>
 							</tr>
-							<?php else:?>
-							<?php foreach ($this->cart->contents() as $key => $item):?>
+							<?php else: foreach ($this->cart->contents() as $key => $item):?>
 							<tr>
 								<td><img src="<?=$item['thumb']?>" alt="<?=$item['name']?>" height="50"></td>
 								<td><?=$item['product_id']?></td>
@@ -46,19 +45,17 @@
 								</td>
 								<td><output name="total-price">$ <?=$this->cart->format_number($item['subtotal'])?></output></td>
 							</tr>
-							<?php endforeach;?>
-							<?php endif?>
-							<?php if(count($this->cart->contents())>0):?>
-							<tr  class="table-success">
-								<td colspan="6"></td>
-							</tr>
-							<tr>
-								<td colspan="3"></td>
-								<td colspan="2" class="text-right">Total Price:</td>
-								<td>$<?= $this->cart->format_number($this->cart->total()); ?></td>
-							</tr>
-							<?php endif?>
+							<?php endforeach; endif?>
 						</tbody>
+						<?php if(count($this->cart->contents())>0):?>
+						<tfooter>
+							<tr class="table-success">
+								<th colspan="3"></th>
+								<th colspan="2" class="text-right">Total Price:</th>
+								<th>$<?= $this->cart->format_number($this->cart->total()); ?></th>
+							</tr>
+						</tfooter>
+						<?php endif?>
 					</table>
 				</div>
 			</div>

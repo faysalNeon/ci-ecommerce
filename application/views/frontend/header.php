@@ -18,11 +18,15 @@
 </head>
 <body>
 <header class="app-header sticky-top shadow-sm">
+<div class="text-center d-block d-lg-none">
+  <a class="navbar-brand navbar-toggler" href="<?=base_url();?>">
+    <h3 class="text-uppercase text-info"><?=setting('store_name')?></h3>
+  </a>
+</div>
 <nav class="navbar navbar-expand-lg navbar-light">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#appMenu">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <a class="navbar-brand text-uppercase text-info text-bold" href="<?=base_url();?>"><?=setting('store_name')?></a>
+  <a class="navbar-brand text-center d-none d-lg-block" href="<?=base_url();?>">
+    <b class="text-uppercase text-info"><?=setting('store_name')?></b>
+  </a>
   <div class="mr-auto d-none d-lg-block">
     <ul class="navbar-nav text-uppercase">
       <?php foreach (get_category() as $pid => $parent): if($parent->top==0) continue; ?>
@@ -44,12 +48,15 @@
       <?php endforeach;?>
     </ul>
   </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#appMenu">
+    <span class="navbar-toggler-icon"></span>
+  </button>
   <div class="shortcut">
-    <a class="btn btn-secondary" data-toggle="collapse" href="#appSearch" aria-controls="appSearch">
+    <a class="btn btn-sm btn-secondary" data-toggle="collapse" href="#appSearch" aria-controls="appSearch">
         <i class="mdi mdi-file-search"></i>
     </a>
     <div class="dropdown d-inline">
-        <button type="button" class="btn btn-info" data-toggle="dropdown">
+        <button type="button" class="btn btn-sm btn-info" data-toggle="dropdown">
           <?php if (access()):?>
             <i class="mdi mdi-account"></i>
           <?php else:?>
@@ -64,21 +71,7 @@
                 <h3 class="name mt-3"><?=user_data('name')?></h3>
                 <h6 class="email mt-3"><?=user_data('mobile')?></h6>
                 <h6 class="email my-3"><?=user_data('email')?></h6>
-                <div class="d-block my-2">
-                    <a href="<?=base_url('account')?>" class="btn btn-sm rounded-circle btn-info">
-                        <i class="mdi mdi-home"></i>
-                    </a>
-                    <a href="<?=base_url('orders')?>" class="btn btn-sm rounded-circle btn-info">
-                        <i class="mdi mdi-cart-arrow-up"></i>
-                    </a>
-                    <a href="<?=base_url('payments')?>" class="btn btn-sm rounded-circle btn-info">
-                        <i class="mdi mdi-cogs"></i>
-                    </a>
-                    <a href="<?=base_url('settings')?>" class="btn btn-sm rounded-circle btn-info">
-                        <i class="mdi mdi-cogs"></i>
-                    </a>
-                </div>
-                <a href="<?=base_url('logout');?>" class="btn btn-block btn-danger"> Logout </a>
+                <a href="<?=base_url('account')?>" class="btn btn-block btn-info"> My Account </a>
                 <?php else:?>
                   <a href="<?=base_url('login');?>" class="btn btn-block btn-outline-secondary"> Login </a>
                   <a href="<?=base_url('register');?>" class="btn btn-block btn-outline-secondary"> Register </a>
@@ -88,9 +81,9 @@
         </div>
     </div>
     <div class="dropdown d-inline">
-        <button type="button" class="btn btn-warning" data-toggle="dropdown">
-            <i class="mdi mdi-cart"></i>
-            <span class="badge badge-pill badge-dark" id="cartCount"><?=count($this->cart->contents())?></span>
+        <button type="button" class="btn btn-sm btn-warning" data-toggle="dropdown">
+          <i class="mdi mdi-cart"></i>
+          <span class="badge badge-pill badge-dark" id="cartCount"><?=count($this->cart->contents())?></span>
         </button>
         <div class="cart-menu dropdown-menu">
           <div class="card shadow-2">
@@ -104,16 +97,22 @@
           </div>
         </div>
     </div>
+    <?php if (access()):?>
+    <button type="button" class="btn btn-sm btn-danger mr-1" data-toggle="modal" data-target="#exitConfirm">
+			<i class="mdi mdi-location-exit"></i>
+    </button>    
+    <?php endif;?>     
   </div>
 </nav>
 <form class="p-1 collapse" id="appSearch" action="<?=base_url('products/search')?>" method="POST">
     <div class="input-group">
         <input class="form-control" name="search" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
-            <button type="submit" class="input-group-text"><i class="mdi mdi-sync"></i></button>
+          <button type="submit" class="input-group-text"><i class="mdi mdi-sync"></i></button>
         </div>
     </div>
 </form>
+
 <aside class="collapse navbar-collapse collapsed navbar-toggler text-uppercase" id="appMenu">
   <?php foreach (get_category() as $pid => $parent): if($parent->top==0) continue; ?>
   <?php if(check_category($parent->id)==0):?>

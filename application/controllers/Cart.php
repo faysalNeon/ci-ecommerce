@@ -83,4 +83,17 @@
         $this->output->set_output(json_encode($this->session->userdata('step')));
         $this->output->get_output();
     }
+    public function invoice($order_id){
+        $this->load->library('Pdf');
+        // if (check_admin()==1){
+        //     $this->load->library('Pdf');
+        //     $data['page_title'] = lang('student_details');
+        //     $data['student_data'] =$this->ServerData->get_student_data($order_id);
+        //         $this->pdf->load_view($this->router->fetch_class().'/student_data',$data);
+        //         $this->pdf->render();
+        //         $this->pdf->stream("Student_list-".date('d-m-Y').".pdf",array('Attachment'=>0));
+        // }else{
+        //     redirect();
+        // }
+    }
  }
