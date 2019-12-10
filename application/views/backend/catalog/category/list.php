@@ -43,5 +43,13 @@
 	</div>
 </div>
 <script>
-	function status(id){ $.ajax({url:'<?=base_url('server/categories/status/')?>'+id, method:"POST"}); location.reload();}
+	function status(id){ 
+		$.ajax({
+			method:"POST"
+			url:'<?=base_url('server/categories/status/')?>'+id,
+			success:function(){
+				location.reload();
+			}
+		}); 
+	}
 </script>

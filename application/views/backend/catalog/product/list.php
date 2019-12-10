@@ -13,6 +13,7 @@
 						<th class="pb-2" width="100" >Code</th>
 						<th class="pb-2">Product Name</th>
 						<th class="pb-2">Product Category</th>
+						<th class="pb-2">Feature Product</th>
 						<th class="p-1 clean"><a href="<?=base_url('server/products/new')?>" class="btn btn-primary btn-sm btn-block">Add New</a></th>
 					</tr>
 				</thead>
@@ -23,6 +24,7 @@
 					<td><?=$data->product_code?></td>
 					<td><?=$data->product_name?></td>
 					<td><?=$data->category_name?></td>
+					<td> <?=empty($this->pm->features($data->product_id)->product_id)?></td>
 					<td class="tools text-center" width="100">
 						<div class="btn-group">
 							<button type="button" onClick="status(<?=$data->product_id?>)" class="btn btn-info btn-sm">

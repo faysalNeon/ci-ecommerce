@@ -13,7 +13,7 @@ class Account extends CI_Controller{
             redirect('server');
         }elseif (access()) {
             $data['title']="My Account";
-            $data['address']=$this->db->get_where('address',array('id'=>user_data('address_id')))->row();
+            $data['address']=$this->hm->address();
             $this->load->store('account/home', $data);
         }else{
             redirect('login');
@@ -106,7 +106,7 @@ class Account extends CI_Controller{
                 list($type, $this_photo) = array_pad(explode(';', $this_photo),2,null);
                 list(, $this_photo)      = array_pad(explode(',', $this_photo),2,null);
                 $this_photo = base64_decode($this_photo);
-                $image_url = '/uploads/customers/customer_'.$this->session->userdata('id').'.png';
+                $image_url = '/uploads/customers/customer_'.time().'_'.$this->session->userdata('id').'.png';
                 if (file_exists($_SERVER["DOCUMENT_ROOT"].'/'.$image_url)) unlink($_SERVER["DOCUMENT_ROOT"].'/'.$image_url);
                 file_put_contents($_SERVER["DOCUMENT_ROOT"].'/'.$image_url, $this_photo);
                 $data[$field]=base_url($image_url);
@@ -124,10 +124,6 @@ class Account extends CI_Controller{
         $this->output->set_output(json_encode($status));
         $this->output->get_output();
     }
-
-
-
-
     public function processing(){
         $this->form_validation->set_rules('name', 'Name', 'required|min_length[3]|max_length[50]');
         $this->form_validation->set_rules('mobile', 'Mobile', 'required|min_length[8]|max_length[16]');
@@ -214,10 +210,13 @@ class Account extends CI_Controller{
         $data['zip']=$this->input->post("zip");
         $data['status']=1;
         if ($id) {
-            $this->db->update('address', $data, array('id'=>$id));
+            $this->db->where('id',$id);
+            $this->db->update('address', $data);
         }else{
             $this->db->insert('address', $data);
-            $this->db->update($this->table, array('id'=>$this->session->userdata('id'), 'address_id'=> $this->db->insert_id()));
+            $csd['address_id']=$this->db->insert_id();
+            $this->db->where('id',$this->session->userdata('id'));
+            $this->db->update($this->table, $csd);
         }
         if($this->db->affected_rows()>=0){
             $this->session->set_flashdata('alert',array(

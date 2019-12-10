@@ -43,6 +43,7 @@
     public function checkout(){
         if(count($this->cart->contents())>0){
             $data['title']="Product Checkout";
+            $data['address']=$this->db->get_where('address',array('id'=>user_data('address_id')))->row();
             $this->load->store('shopping/checkout',$data);
         }else{
             $this->session->set_flashdata('alert',array(
@@ -53,16 +54,12 @@
             return redirect('cart');
         }
     }
-    public function complete(){
-        $data['title']="Order Complete";
-        $this->load->store('shopping/complete');
-    }
     public function order(){
-        $data['title']="Order Complete";
+        $data['title']="Order";
         $this->load->store('shopping/complete');
     }
     public function payment(){
-        $data['title']="Order Complete";
+        $data['title']="Payemnts";
         $this->load->store('shopping/complete');
     }
     public function data(){
@@ -73,27 +70,43 @@
         $this->output->get_output();
     }
     public function step($id){
-        if($this->session->has_userdata('step')){
-            $this->session->set_userdata('step', $id);
-        }else{
-            $this->session->set_userdata('step', 1);
+        switch ($id) {
+            case 1:
+            case 2:
+                $this->session->set_userdata('step', $id);
+            break;
+            case 3:
+                $data['address']=$this->input->post('address');
+                $data['city']=$this->input->post('city');
+                $data['country']=$this->input->post('country');
+                $data['zip']=$this->input->post('zip');
+                $this->session->set_userdata('address', $data);
+                $this->session->set_userdata('step', $id); 
+            break;
+            case 4:
+                $data['method']=$this->input->post('method');
+                $data['comment']=$this->input->post('comment');
+                $this->session->set_userdata('delivery', $data);
+                $this->session->set_userdata('step', $id); 
+            break;
+            case 5:
+                $data['method']=$this->input->post('method');
+                $data['comment']=$this->input->post('comment');
+                $this->session->set_userdata('payment', $data);
+                $this->session->set_userdata('step', $id);
+            break;
+            default:
+                $this->session->set_userdata('step', 1);
+            break;
         }
+
         if (!$this->input->is_ajax_request()){ redirect(); die;}
         $this->output->set_content_type('application/json');
         $this->output->set_output(json_encode($this->session->userdata('step')));
         $this->output->get_output();
     }
-    public function invoice($order_id){
-        $this->load->library('Pdf');
-        // if (check_admin()==1){
-        //     $this->load->library('Pdf');
-        //     $data['page_title'] = lang('student_details');
-        //     $data['student_data'] =$this->ServerData->get_student_data($order_id);
-        //         $this->pdf->load_view($this->router->fetch_class().'/student_data',$data);
-        //         $this->pdf->render();
-        //         $this->pdf->stream("Student_list-".date('d-m-Y').".pdf",array('Attachment'=>0));
-        // }else{
-        //     redirect();
-        // }
+    public function invoice(){
+        $data['title']='Invoice';
+        $this->load->view('frontend/shopping/invoice',$data);
     }
  }

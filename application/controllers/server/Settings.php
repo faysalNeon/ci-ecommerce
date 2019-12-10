@@ -41,13 +41,6 @@ class Settings extends CI_Controller{
             $this->load->server('settings/sliders',$data);
         }
     }
-    public function pages($crud = 'list'){
-        // if (empty(access(1))) return redirect(base_url(),'refresh');
-        if($crud==='list'){
-            $data['title']='Page List';
-            $this->load->server('settings/pages',$data);
-        }
-    }
     public function options($crud = 'list'){
         // if (empty(access(1))) return redirect(base_url(),'refresh');
         if($crud==='list'){

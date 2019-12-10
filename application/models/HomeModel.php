@@ -3,16 +3,30 @@ class HomeModel extends CI_Model{
     public function __construct() {
         parent::__construct();
     }
-    // home 
-    public function slider(){
-        return $this->db
-        ->get_where('sliders', array('status' => 1))
-        ->result();
+    // home
+    public function customer(){
+        return $this->db->get('customers')->result();
     }
-    public function banner(){
-        return $this->db
-        ->get_where('banners',array('status' => 1))
-        ->result();
+    public function users(){
+        return $this->db->get('users')->result();
+    }
+    public function slider($full=false){
+        if ($full) {
+            return $this->db->get('sliders')->result();
+        }else{
+            return $this->db
+            ->get_where('sliders', array('status' => 1))
+            ->result();
+        }
+    }
+    public function banner($full=false){
+        if ($full) {
+            return $this->db->get('banners')->result();
+        }else{
+            return $this->db
+            ->get_where('banners',array('status' => 1))
+            ->result();
+        }
     }
     public function feature(){
         return $this->db
@@ -78,5 +92,9 @@ class HomeModel extends CI_Model{
             (object)array('id'=>11,'name'=>'China'),
             (object)array('id'=>12,'name'=>'Japan')
         );
+    }
+
+    public function address(){
+        return $this->db->get_where('address',array('id'=>user_data('address_id')))->row();
     }
 }

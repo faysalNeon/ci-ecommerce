@@ -109,6 +109,24 @@ if(!function_exists('check_thumb')){
     }
 }
 
+if(!function_exists('role')){
+    function role($id=1){
+        switch ($id) {
+            case 1:
+                return "admin";
+                break;
+            case 2:
+                return "modarator";
+                break;
+            case 3:
+                return "editor";
+                break;
+            default:
+                return false;
+                break;
+        }
+    }
+}
 if(!function_exists('step')){
     function step($id=1){
         $ci = &get_instance();
@@ -119,4 +137,13 @@ if(!function_exists('step')){
         }
     }
 }
+
+if(!function_exists('session')){
+    function session($name=null){
+        $ci = &get_instance();
+        return $ci->session->userdata($name);
+    }
+}
+
+
 

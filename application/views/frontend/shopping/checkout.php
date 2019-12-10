@@ -12,13 +12,13 @@
 						<div class="card-header">
 							<h6 class="m-0"><b class='text-uppercase'>Step 1:-</b>Account Details</h6>
 						</div>
-						<div id="step_1" class="collapse <?=step(1)?>" data-parent="#checkoutGroup">
+						<div id="step_1" class="collapse show" data-parent="#checkoutGroup">
 							<div class="card-body">
 								<?php if (access()):?>
 								<div class="text-center">
 									<h3>Hello! Dear <b><?=user_data('name')?></b></h3>
 									<p>You have successfully completed step one</p>
-									<button type="button" class="btn btn-info w-25" onClick="next(2)">continue</buttona>
+									<button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#step_2">Continue</buttona>
 								</div>
 								<?php else:?>
 								<ul class="nav nav-tabs justify-content-center">
@@ -64,7 +64,7 @@
 										</div>
 										<div class="form-group">
 											<label for="inputRegisterPassconf">Password Confirmation</label>
-											<input type="passconf" class="form-control" name="passconf" id="inputRegisterPassconf" placeholder="Password Confirmation" require>
+											<input type="password" class="form-control" name="passconf" id="inputRegisterPassconf" placeholder="Password Confirmation" require>
 										</div>
 										<div class="p-0 m-2  d-flex justify-content-end">
 											<button type="submit" class="float-right btn btn-secondary">continue</buttona>
@@ -75,6 +75,7 @@
 							</div>
 						</div>
 					</article>
+					<form action="<?=base_url('cart/invoice')?>" method="POST">
 					<article class="card">
 						<div class="card-header">
 							<h6 class="m-0">
@@ -83,7 +84,7 @@
 								<i class="float-right mdi mdi-lock-outline"></i>
 							</h6>
 						</div>
-						<form id="step_2" class="collapse <?=step(2)?>" data-parent="#checkoutGroup">
+						<div id="step_2" class="collapse" data-parent="#checkoutGroup">
 							<div class="card-body">
 								<div class="form-group">
 									<label for="inputAddress">Address</label>
@@ -108,20 +109,12 @@
 										<input type="text" class="form-control" id="inputZip" name="zip">
 									</div>
 								</div>
-								<div class="form-group">
-									<div class="ml-4 custom-checkbox">
-										<input class="custom-control-input" type="checkbox" id="gridCheck">
-										<label class="custom-control-label" for="gridCheck">
-											I have read and agree to the Privacy Policy
-										</label>
-									</div>
-								</div>
 							</div>
 							<div class="p-0 m-2  d-flex justify-content-between">
-								<button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#step_1">back</buttona>
-								<button type="button" class="btn btn-secondary" onClick="next(3)">continue</buttona>
+								<button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#step_1">Back</buttona>
+								<button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#step_3">Continue</buttona>
 							</div>
-						</form>
+						</div>
 					</article>
 					<article class="card">
 						<div class="card-header">
@@ -131,7 +124,7 @@
 								<i class="float-right mdi mdi-lock-outline"></i>
 							</h6>
 						</div>
-						<form id="step_3" class="collapse <?=step(3)?>" data-parent="#checkoutGroup">
+						<div id="step_3" class="collapse" data-parent="#checkoutGroup">
 							<div class="card-body">
 								<small class="mb-1">Please select the preferred payment method to use on this
 									order.</small>
@@ -153,10 +146,10 @@
 								</div>
 							</div>
 							<div class="p-0 m-2  d-flex justify-content-between">
-								<button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#step_1">back</buttona>
-								<button type="button" class="btn btn-secondary" onClick="next(4)">continue</buttona>
+								<button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#step_2">back</buttona>
+								<button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#step_4">back</buttona>
 							</div>
-						</form>
+						</div>
 					</article>
 					<article class="card">
 						<div class="card-header">
@@ -166,7 +159,7 @@
 								<i class="float-right mdi mdi-lock-outline"></i>
 							</h6>
 						</div>
-						<form id="step_4" class="collapse <?=step(4)?>" data-parent="#checkoutGroup">
+						<div id="step_4" class="collapse" data-parent="#checkoutGroup">
 							<div class="card-body">
 								<small class="mb-1">Please select the preferred payment method to use on this
 									order.</small>
@@ -189,10 +182,10 @@
 								</div>
 							</div>
 							<div class="p-0 m-2  d-flex justify-content-between">
-								<button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#step_2">back</buttona>
-								<button type="button" class="btn btn-secondary" onClick="next(5)">continue</buttona>
+								<button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#step_3">back</buttona>
+								<button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#step_5">back</buttona>
 							</div>
-						</form>
+						</div>
 					</article>
 					<article class="card">
 						<div class="card-header">
@@ -202,115 +195,8 @@
 								<i class="float-right mdi mdi-lock-outline"></i>
 							</h6>
 						</div>
-						<form id="step_5" class="collapse <?=step(5)?>" data-parent="#checkoutGroup">
+						<div id="step_5" class="collapse" data-parent="#checkoutGroup">
 							<div class="card-body">
-								<h6 class="text-success">Personal</h6>
-								<div class="table-responsive table-sm text-center">
-									<table class="table table-bordered" style="min-width:1000px">
-										<thead>
-											<th>Name</th>
-											<th>Mobile</th>
-											<th>Email</th>
-										</thead>
-										<tbody>
-											<tr>
-												<td><?=user_data('name')?></td>
-												<td><?=user_data('mobile')?></td>
-												<td><?=user_data('email')?></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-								<h6 class="mt-3 text-success">Address</h6>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="table-responsive table-sm">
-											<table class="table table-bordered" style="min-width:300px">
-												<thead>
-													<tr>
-														<th colspan="2" class='text-center'>Home Address</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<th width="80">Address</th>
-														<td>esvos</td>
-													</tr>
-													<tr>
-														<th>City</th>
-														<td>efdasfsaf</td>
-													</tr>
-													<tr>
-														<th>Country</th>
-														<td>Bangladesh</td>
-													</tr>
-													<tr>
-														<th>Zip</th>
-														<td>1230</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="table-responsive table-sm">
-											<table class="table table-bordered" style="min-width:300px">
-												<thead>
-													<tr>
-														<th colspan="2" class='text-center'>Shipping Address</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<th width="80">Address</th>
-														<td>fdsafsafsa</td>
-													</tr>
-													<tr>
-														<th>City</th>
-														<td>fdsafsafsa</td>
-													</tr>
-													<tr>
-														<th>Country</th>
-														<td>Bangladesh</td>
-													</tr>
-													<tr>
-														<th>Zip</th>
-														<td>1230</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-									<div class="col-12">
-										<div class="table-responsive table-sm">
-											<table class="table table-bordered" style="min-width:300px">
-												<tr>
-													<th width="150">Payment Method:</th>
-													<td>Cash On Delivary</td>
-												</tr>
-												<tr>
-													<td colspan="2">Delivary comment info</td>
-												</tr>
-											</table>
-										</div>
-									</div>
-									<div class="col-12">
-										<div class="table-responsive table-sm">
-											<table class="table table-bordered" style="min-width1000px">
-												<tr>
-													<th width="150">Shipping Method:</th>
-													<td>Free shipping</td>
-													<th width="150" class="text-right">Shipping Charge:</th>
-													<td width="100" class="text-right">$0.00</td>
-												</tr>
-												<tr>
-													<td colspan="4">Shipping comment info</td>
-												</tr>
-											</table>
-										</div>
-									</div>
-								</div>
-								<h6 class="mt-3 text-success">Products</h6>
 								<div class="table-responsive table-sm text-center">
 									<table class="table table-bordered" style="min-width:1000px">
 										<thead>
@@ -352,29 +238,11 @@
 									<button type="submit" class="btn btn-secondary">Confirm Order</buttona>
 								</div>
 							</div>
-						</form>
+						</div>
 					</article>
+					</form>
 				</section>
 			</div>
 		</div>
 	</div>
 </section>
-<script>
-	function next($id){
-		$.ajax({ 
-			url : '<?=base_url('cart/step/')?>'+$id,
-			type : "POST",
-			success:function(step){
-				location.reload();
-				// console.log(step);
-			}
-		})
-	}
-$(function(){
-	$('form').submit(function(e){
-		e.preventDefault();
-		var $formData = $(this).serialize(), $url = $(this).attr('action');
-		$.ajax({ url : $url, type : "POST", data : $formData, success : function(res) { location.reload();}});
-	});
-})
-</script>

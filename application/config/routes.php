@@ -4,6 +4,7 @@ $route['default_controller'] = 'home';
 $route['404_override'] = 'home/error';
 $route['translate_uri_dashes'] = FALSE;
 $route['server']='server/dashboard';
+$route['profile']='server/settings/users';
 // front view
 $route['product/(:any)']='products/single/$1';
 $route['category-(:num)']='products/category/$1';

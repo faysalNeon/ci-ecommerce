@@ -11,8 +11,10 @@
 	<link href="<?=base_url();?>assets/vendors/mdi/css/materialdesignicons.min.css" rel="stylesheet" >
 	<script src="<?=base_url();?>assets/vendors/jquery-3.4.1.min.js"></script>
 	<script src="<?=base_url();?>assets/vendors/Croppie/croppie.min.js"></script>
+	<script src="<?=base_url();?>assets/vendors/wysihtml5/wysihtml5.min.js"></script>
 	<link href="<?=base_url();?>assets/vendors/bootstrap/bootstrap.min.css" rel="stylesheet">
 	<script src="<?=base_url();?>assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+	<link href="<?=base_url();?>assets/vendors/wysihtml5/wysihtml5.min.css" rel="stylesheet"/>
 	<link href="<?=base_url();?>assets/vendors/datatables/datatables.css" rel="stylesheet"/>
 	<link href="<?=base_url();?>assets/vendors/Croppie/croppie.css" rel="stylesheet"/>
 	<link href="<?=base_url();?>assets/styles/server.css" rel="stylesheet"/>
@@ -33,10 +35,9 @@
 		<li class="header"> Catalog </li>
 		<li><a href="<?=base_url('server/categories')?>"><i class="mdi mdi-folder-plus-outline"></i> <span class='mtxt'> Categories </span> </a></li>
 		<li><a href="<?=base_url('server/products')?>"><i class="mdi mdi-clipboard-text-outline"></i> <span class='mtxt'> Products </span></a></li>
-		<li><a href="<?=base_url('server/products/features')?>"><i class="mdi mdi-codepen"></i><span class='mtxt'> Feature Product </span></a></li>
 		<li class="header"> Customer & Order </li>
-		<li><a href="<?=base_url('server/shopping/customers')?>"><i class="mdi mdi-account-group"></i><span class='mtxt'> Customers </span> </a></li>
-		<li><a href="<?=base_url('server/shopping/orders')?>"><i class="mdi mdi-clipboard-list"></i><span class='mtxt'> Manage Order </span> </a></li>
+		<li><a href="<?=base_url('server/customers')?>"><i class="mdi mdi-account-group"></i><span class='mtxt'> Customers </span> </a></li>
+		<li><a href="<?=base_url('server/orders')?>"><i class="mdi mdi-clipboard-list"></i><span class='mtxt'> Manage Order </span> </a></li>
 		<li class="header"> Settings </li>
 		<li class="treeview">
 			<a href="javascript:void(0)">
@@ -45,10 +46,9 @@
 			<ul class="treeview-menu" style="display: none;">
 				<li><a href="<?=base_url('server/settings/sliders')?>"><i class="mdi mdi-monitor-multiple"></i><span class='mtxt'> Sliders </span></a></li>
 				<li><a href="<?=base_url('server/settings/banners')?>"><i class="mdi mdi-monitor-multiple"></i><span class='mtxt'> Banners </span></a></li>
-				<li><a href="<?=base_url('server/settings/pages')?>"><i class="mdi mdi-file-replace"></i><span class='mtxt'> Pages </span></a></li>
 			</ul>
 		</li>
-		<li><a href="<?=base_url('server/settings/users')?>"><i class="mdi mdi-account-details"></i> <span class='mtxt'> Users </span></a></li>
+		<li><a href="<?=base_url('profile')?>"><i class="mdi mdi-account-details"></i> <span class='mtxt'> Users </span></a></li>
 		<li><a href="<?=base_url('server/settings')?>"><i class="mdi mdi-settings"></i> <span class='mtxt'> Options </span></a></li>
 	</ul>
 </aside>

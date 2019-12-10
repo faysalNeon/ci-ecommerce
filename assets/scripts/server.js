@@ -1,8 +1,3 @@
-$(document).ready(function() {
-  CKEDITOR.replace('rEditor',function(config) {
-    config.removeButtons = 'Save,About,Language,NewPage,Preview,Print,Templates,Scayt,Form,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField';
-  });
-});
 // end menu transition 
 $(function(){
   var menu = $('.sidebar-menu');
@@ -28,5 +23,26 @@ $(function(){
       });
     }
     if (checkElement.is('.treeview-menu')) { e.preventDefault(); }
+  });
+});
+
+jQuery(document).ready(function($){
+	$('.table-data').each(function(){
+		let table=$(this).DataTable({ "columnDefs": [{ "targets": 'clean', "orderable": false,}] });
+		$('.row.top').remove();
+		table.columns().every(function(){ let that = this;
+		    $('input,select', this.footer()).on('keyup change', function(){
+		        if ( that.search() !== this.value){
+		            that.search(this.value).draw();
+		        }
+		    });
+		});
+	});
+  
+  $('.editor').each(function(){
+    $(this).wysihtml5({
+      "color":true,
+      "stylesheets": ['assets/library/wysihtml5/wysiwyg-color.css']
+    });
   });
 });

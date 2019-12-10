@@ -1,8 +1,8 @@
 <?php 
-class Customers extends CI_Controller{
-    protected $table="customers";
+class Orders extends CI_Controller{
+    protected $table="orders";
     protected $primary='id';
-    protected $home='server/customers';
+    protected $home='server/orders';
     public function __construct(){
         parent::__construct();
         $this->output->set_header('Last-Modified: ' . gmdate("D, d M Y H:i:s") . ' GMT');
@@ -13,8 +13,9 @@ class Customers extends CI_Controller{
         if (empty(access(1))) return redirect();
     }
     public function index(){
-        $data['title']='Customer list';
-        $this->load->server('shopping/customer/list',$data);
+        $data['title']='Orders';
+        $data['cat_list']=$this->db->get($this->table)->result();
+        $this->load->server('catalog/category/list',$data);
     }
     public function new(){
         $data['data']=false;
